@@ -7,9 +7,6 @@
 </head>
 <body>
     <script>
-        const humanScore = 0;
-        const computerScore = 0;
-        const round = 5;
 
         function getComputerChoice() {
             const choices = ["rock", "paper", "scissors"];
@@ -20,39 +17,53 @@
         function getHumanChoice(){
             const choice = prompt("Input your choice(ROCK, PAPER, or SCISSORS.)")
             const humanChoice = choice.toLowerCase()
-            /*if(humanChoice !== "rock"){
-                console.log("ENTER A VALID CHOICE!!!");
-            } else if(humanChoice !== "paper"){
-                console.log("ENTER A VALID CHOICE!!!");
-            } else if(humanChoice !== "scissors"){
-                console.log("ENTER A VALID CHOICE!!!");
-            }*/
             return humanChoice;
         }
 
-        function playround(humanChoice, computerChoice){
-            //for(let i = 0; i <= round; i++) {
-                if(humanChoice === computerChoice){
-                console.log("You draw this round. Continue playing");
-                } else if(humanChoice === "rock" && computerChoice === "paper"){
-                    console.log("COMPUTER WIN! Paper beat rock");
-                } else if(humanChoice === "paper" && computerChoice === "rock"){
-                    console.log("YOU WIN! Paper beat scissors");
-                } else if(humanChoice === "rock" && computerChoice === "scissors"){
-                    console.log("YOU WIN! Rock beat Scissors");
-                } else if(humanChoice === "scissors" && computerChoice === "rock"){
-                    console.log("COMPUTER WIN! Rock beat Scissors");
-                } else if(humanChoice === "paper" && humanChoice === "scissors"){
-                    console.log("COMPUTER WIN! Scissors beat Paper");
-                } else if(humanChoice === "scissors" && computerChoice === "paper"){
-                    console.log("YOU WIN! scissors beat paper");
-                } 
+        // Function to determine the winner
+        function determineWinner(userChoice, computerChoice) {
+        if (userChoice === computerChoice) {
+            return 'tie';
+        } else if (
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'paper' && computerChoice === 'rock') ||
+            (userChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            return 'user';
+        } else {
+            return 'computer';
+        }
+        }
+
+        // Function to play the game
+        function playGame() {
+            let userScore = 0;
+            let computerScore = 0;
+            for (let i = 0; i < 5; i++) {
+                const userChoice = getHumanChoice();
+                const computerChoice = getComputerChoice();
+                console.log(`Computer chose: ${computerChoice}`);
+                const winner = determineWinner(userChoice, computerChoice);
+                if (winner === 'user') {
+                    userScore++;
+                    console.log('You win this round!');
+                } else if (winner === 'computer') {
+                    computerScore++;
+                    console.log('Computer wins this round!');
+                } else {
+                    console.log("It's a tie!");
+                }
             }
-        //};
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        console.log(playround(humanSelection, computerSelection));
-        console.log(getComputerChoice());
+            if (userScore > computerScore) {
+                console.log('You win the game!');
+            } else if (userScore < computerScore) {
+                console.log('Computer wins the game!');
+            } else {
+                console.log("It's a tie game!");
+            }
+        }
+
+        console.log(playGame());
 
     </script>
 </body>
