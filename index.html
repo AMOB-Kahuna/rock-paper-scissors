@@ -40,10 +40,10 @@
             let userScore = 0;
             let computerScore = 0;
             for (let i = 0; i < 5; i++) {
-                const userChoice = getHumanChoice();
-                const computerChoice = getComputerChoice();
-                console.log(`Computer chose: ${computerChoice}`);
-                const winner = determineWinner(userChoice, computerChoice);
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                console.log(`Computer chose: ${computerSelection}`);
+                const winner = determineWinner(humanSelection, computerSelection);
                 if (winner === 'user') {
                     userScore++;
                     console.log('You win this round!');
