@@ -8,24 +8,24 @@
 <body>
 
     <h1>ROCK PAPER SCISSORS GAME</h1>
-    <button>rock</button>
-    <button>paper</button>
-    <button>scissors</button>
+    <button value="rock">rock</button>
+    <button value="paper">paper</button>
+    <button value="scissors">scissors</button>
+
+    <div>
+        <p>Score board</p>
+    </div>
 
     <script>
+        
+        const buttons = document.querySelectorAll("button");
 
         function getComputerChoice() {
             const choices = ["rock", "paper", "scissors"];
             const randomIndex = Math.floor(Math.random() * choices.length);
             return choices[randomIndex];
         }
-
-        function getHumanChoice(){
-            const choice = prompt("Input your choice(ROCK, PAPER, or SCISSORS.)")
-            const humanChoice = choice.toLowerCase()
-            return humanChoice;
-        }
-
+        
         // Function to determine the winner
         function determineWinner(userChoice, computerChoice) {
         if (userChoice === computerChoice) {
@@ -42,34 +42,25 @@
         }
 
         // Function to play the game
-        function playGame() {
-            let userScore = 0;
-            let computerScore = 0;
-            for (let i = 0; i < 5; i++) {
-                const humanSelection = getHumanChoice();
-                const computerSelection = getComputerChoice();
-                console.log(`Computer chose: ${computerSelection}`);
-                const winner = determineWinner(humanSelection, computerSelection);
-                if (winner === 'user') {
-                    userScore++;
-                    console.log('You win this round!');
-                } else if (winner === 'computer') {
-                    computerScore++;
-                    console.log('Computer wins this round!');
-                } else {
-                    console.log("It's a tie!");
-                }
-            }
-            if (userScore > computerScore) {
-                console.log('You win the game!');
-            } else if (userScore < computerScore) {
-                console.log('Computer wins the game!');
-            } else {
-                console.log("It's a tie game!");
-            }
-        }
+        function playGame(humanChoice) {
+            const computerSelection = getComputerChoice();
 
-        console.log(playGame());
+            console.log(`Computer choose: ${computerSelection} You choose: ${humanChoice}`);
+        }
+        
+        let scoreBoard = document.querySelector("div");
+        
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const humanChoice = button.value;
+                playGame(humanChoice);
+            });
+        });
+        
+
+
+
+
 
     </script>
 </body>
