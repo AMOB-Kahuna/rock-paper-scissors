@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>RPS Game</title>
 </head>
 <body>
+    
+    <div id="frame">
 
-    <h1>ROCK PAPER SCISSORS GAME</h1>
-    <button value="rock">rock</button>
-    <button value="paper">paper</button>
-    <button value="scissors">scissors</button>
-
-    <div id="container">
-
-        <div id="score">
-            <p>Score board</p>
-        </div>
-
-        <div id="scoreTable">
-
-            <p id="count1">
+        <h1>ROCK PAPER SCISSORS GAME</h1>
+        <button value="rock">rock</button>
+        <button value="paper">paper</button>
+        <button value="scissors">scissors</button>
+        
+        <div id="container">
+            
+            <div id="score">
+                <p>Score board</p>
+            </div>
+            
+            <div id="scoreTable">
                 
-            </p>
-            <p id="count2">
-
-            </p>
+                <p id="count1">
+                    
+                </p>
+                <p id="count2">
+                    
+                </p>
+            </div>
         </div>
     </div>
         
@@ -98,11 +102,11 @@
                 
                 const newScoreBoard = document.createElement("p");
                 newScoreBoard.textContent = 'Score Board';
-                if (userScore === 5 && computerScore < 5) {
+                if (userScore >= 5 && computerScore < 5) {
                     alert('You win the game!');
                     scoreBoard.textContent = "";
                     scoreBoard.appendChild(newScoreBoard);
-                } else if (userScore < 5 && computerScore === 5) {
+                } else if (userScore < 5 && computerScore >= 5) {
                     alert('Computer wins the game!');
                     scoreBoard.textContent = "";
                     scoreBoard.appendChild(newScoreBoard);
