@@ -19,16 +19,6 @@
         </div>
 
         <div id="scoreTable">
-            <!-- <table>
-                <thead>
-                    <tr>Computer</tr>
-                    <tr>You</tr>
-                </thead>
-                <tbody>
-                    <tr></tr>
-                    <t
-                </tbody>
-            </table> -->
 
             <p id="count1">
                 
@@ -67,15 +57,16 @@
         }
         }
         
+        let userScore = 0;
+        let computerScore = 0;
+
         // Function to play the game
         function playGame(humanChoice) {
-            let userScore = 0;
-            let computerScore = 0;
             const para = document.createElement("p");
             scoreBoard.appendChild(para);
             
             const hrule = document.createElement("hr");
-
+            
             
             const winner = determineWinner(humanChoice, computerSelection);
             if (winner === 'user') {
@@ -93,14 +84,7 @@
                 para.appendChild(choice);
                 para.appendChild(hrule);
             }
-
-            // if (userScore > computerScore) {
-            //     console.log('You win the game!');
-            // } else if (userScore < computerScore) {
-            //     console.log('Computer wins the game!');
-            // } else {
-            //     console.log("It's a tie game!");
-            // }
+            
         }
         
         let scoreBoard = document.querySelector("#score");
@@ -110,20 +94,23 @@
                 const humanChoice = button.value;
                 // const choice = document.createElement("p");
                 choice.textContent = `Computer choose: ${computerSelection} You choose: ${humanChoice}`;
+                playGame(humanChoice);
                 
-                for (i = 0; i < 5; i++) {
-                    playGame(humanChoice);
+                const newScoreBoard = document.createElement("p");
+                newScoreBoard.textContent = 'Score Board';
+                if (userScore === 5 && computerScore < 5) {
+                    alert('You win the game!');
+                    scoreBoard.textContent = "";
+                    scoreBoard.appendChild(newScoreBoard);
+                } else if (userScore < 5 && computerScore === 5) {
+                    alert('Computer wins the game!');
+                    scoreBoard.textContent = "";
+                    scoreBoard.appendChild(newScoreBoard);
                 }
-
-
-
+                
             });
         });
         
-
-
-
-
 
     </script>
 </body>
