@@ -12,19 +12,45 @@
     <button value="paper">paper</button>
     <button value="scissors">scissors</button>
 
-    <div>
-        <p>Score board</p>
-    </div>
+    <div id="container">
 
+        <div id="score">
+            <p>Score board</p>
+        </div>
+
+        <div id="scoreTable">
+            <!-- <table>
+                <thead>
+                    <tr>Computer</tr>
+                    <tr>You</tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                    <t
+                </tbody>
+            </table> -->
+
+            <p id="count1">
+                
+            </p>
+            <p id="count2">
+
+            </p>
+        </div>
+    </div>
+        
     <script>
         
         const buttons = document.querySelectorAll("button");
+        const choice = document.createElement("p");
 
         function getComputerChoice() {
             const choices = ["rock", "paper", "scissors"];
             const randomIndex = Math.floor(Math.random() * choices.length);
             return choices[randomIndex];
         }
+
+        const computerSelection = getComputerChoice();
         
         // Function to determine the winner
         function determineWinner(userChoice, computerChoice) {
@@ -40,20 +66,57 @@
             return 'computer';
         }
         }
-
+        
         // Function to play the game
         function playGame(humanChoice) {
-            const computerSelection = getComputerChoice();
+            let userScore = 0;
+            let computerScore = 0;
+            const para = document.createElement("p");
+            scoreBoard.appendChild(para);
+            
+            const hrule = document.createElement("hr");
 
-            console.log(`Computer choose: ${computerSelection} You choose: ${humanChoice}`);
+            
+            const winner = determineWinner(humanChoice, computerSelection);
+            if (winner === 'user') {
+                userScore++;
+                para.textContent = 'You win this round';
+                para.appendChild(choice);
+                para.appendChild(hrule);
+            } else if (winner === 'computer') {
+                computerScore++;
+                para.textContent = 'Computer win this round';
+                para.appendChild(choice);
+                para.appendChild(hrule);
+            } else {
+                para.textContent = 'it is a tie';
+                para.appendChild(choice);
+                para.appendChild(hrule);
+            }
+
+            // if (userScore > computerScore) {
+            //     console.log('You win the game!');
+            // } else if (userScore < computerScore) {
+            //     console.log('Computer wins the game!');
+            // } else {
+            //     console.log("It's a tie game!");
+            // }
         }
         
-        let scoreBoard = document.querySelector("div");
+        let scoreBoard = document.querySelector("#score");
         
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
                 const humanChoice = button.value;
-                playGame(humanChoice);
+                // const choice = document.createElement("p");
+                choice.textContent = `Computer choose: ${computerSelection} You choose: ${humanChoice}`;
+                
+                for (i = 0; i < 5; i++) {
+                    playGame(humanChoice);
+                }
+
+
+
             });
         });
         
